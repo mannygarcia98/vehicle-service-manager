@@ -29,6 +29,15 @@ Vehicle.init(
       type: DataTypes.STRING(30),
       allowNull: false
     },
+    // Vehicle year column defined here
+    year: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isDecimal: true,
+        max: 4
+      }
+    },
     // Vehicle license_plate number column defined here
     license_number: {
       type: DataTypes.STRING(10),

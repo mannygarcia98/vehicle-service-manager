@@ -35,17 +35,6 @@ Owner.init(
       type: DataTypes.STRING(50),
       allowNull: false
     },
-    // phone number column defined here
-    phone_number: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      // there cannot be any duplicate phone number values in this table
-      unique: true,
-      // if allowNull is set to false, we can run the data through validators before creating the table data
-      validate: {
-        isNumber: true
-      }
-    },
     // email column defined here
     email: {
       type: DataTypes.STRING,
