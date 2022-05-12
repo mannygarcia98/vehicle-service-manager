@@ -4,32 +4,6 @@ const { Owner, Vehicle } = require('../models');
 
 const withAuth = require('../utils/auth');
 
-// GET all Owners for dashboard
-router.get('/', async (req, res) => {
-    try {
-        const dbOwnerdata = await Owner.findAll({
-            include: [
-                {
-                    model: Vehicle,
-                    attributes: ['make', 'model', 'license#'],
-                },
-            ],
-        });
-
-        const owners = dbOwnerData.map((owner) => 
-        owner.get({ plain: true })
-        );
-
-        res.render('dashboard', {
-            owners,
-            loggedIn: req.session.loggedIn,
-        });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
-
 // GET one owner
 
 router.get('/owner/:id', withAuth, async (req, res) => {
