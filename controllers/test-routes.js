@@ -27,6 +27,32 @@ router.get('/', async (req, res) => {
     }
 });
 
+//DELETE one owner
+
+router.delete('/owner/:id', withAuth, async (req, res) => {
+    try {
+        const dbOwnerData = await Owner.findByPk(req.params.id, {
+            include: [
+                {
+                    model: Vehicle,
+                    attributes: [
+                    'year',
+                    'make',
+                    'model',
+                    'license_plate',
+                    ],
+                },
+            ],
+        });
+
+        const owner = dbOwnerData.delete({ plain: true });
+        res.render('owner', {owner, loggedIn: req.session.loggedIn });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 //GET all vehilces
 
 router.get('/', async (req, res) => {
