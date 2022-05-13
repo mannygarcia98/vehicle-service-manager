@@ -13,4 +13,4 @@ Vehicle.belongsTo(Owner, {
   foreignKey: 'owner_id'
 });
 
-module.exports = { Owner}
+module.exports = { Owner, Vehicle }

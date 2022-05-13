@@ -1,8 +1,9 @@
+const router = require('express').Router();
+
+const { Owner, Vehicle } = require('../models');
+
 //GET all Owners
-
-const router = require(".");
-
-router.get('/', async (req, res) => {
+router.get('/owners', async (req, res) => {
     try {
         const dbOwnerdata = await Owner.findAll({
             include: [
@@ -29,7 +30,7 @@ router.get('/', async (req, res) => {
 
 //DELETE one owner
 
-router.delete('/owner/:id', withAuth, async (req, res) => {
+router.delete('/owner/:id', async (req, res) => {
     try {
         const dbOwnerData = await Owner.findByPk(req.params.id, {
             include: [
@@ -55,7 +56,7 @@ router.delete('/owner/:id', withAuth, async (req, res) => {
 
 //GET all vehilces
 
-router.get('/', async (req, res) => {
+router.get('/vehicles', async (req, res) => {
     try {
         const dbVehicleData = await Vehicle.findAll();
         

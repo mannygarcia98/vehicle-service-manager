@@ -19,6 +19,14 @@ Vehicle.init(
       // turn on auto increment
       autoIncrement: true
     },
+    // Vehicle year column defined here
+    year: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isDecimal: true
+      }
+    },
     // Vehicle make column defined here
     make: {
       type: DataTypes.STRING(30),
@@ -28,15 +36,6 @@ Vehicle.init(
     model: {
       type: DataTypes.STRING(30),
       allowNull: false
-    },
-    // Vehicle year column defined here
-    year: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        isDecimal: true,
-        max: 4
-      }
     },
     // Vehicle license plate number column defined here
     license_number: {
