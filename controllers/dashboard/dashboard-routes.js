@@ -42,7 +42,7 @@ router.get('/owner/:id', async (req, res) => {
                     'year',
                     'make',
                     'model',
-                    'license_number',
+                    'license_plate',
                     'owner_id'
                     ],
                 },
@@ -69,7 +69,7 @@ router.put('/owner/:id', async (req, res) => {
                     'year',
                     'make',
                     'model',
-                    'license_number',
+                    'license_plate',
                     'owner_id'
                     ],
                 },
@@ -104,7 +104,7 @@ router.post('/vehicle', (req, res) => {
         year: req.body.year,
         make: req.body.make,
         model: req.body.model,
-        license_number: req.body.license_number,
+        license_plate: req.body.license_plate,
         owner_id: req.body.owner_id
     })
     .then(dbVehicleData => res.json(dbVehicleData))
@@ -121,7 +121,7 @@ router.put('/vehicle/:id', (req, res) => {
         year: req.body.year,
         make: req.body.make,
         model: req.body.model,
-        license_number: req.body.license_number
+        license_plate: req.body.license_plate
     },
     {
     where: {
