@@ -6,11 +6,11 @@ const Vehicle = require('./Vehicle');
 // Owners can have many Vehicles
 Owner.hasMany(Vehicle, {
   foreignKey: 'owner_id'
-  });
-  
-// An Owner has vehicles associated to them
-Vehicle.belongsTo(Owner, {
-foreignKey: 'owner_id'
 });
 
-module.exports = { Owner, Vehicle }
+// An Owner has vehicles associated to them
+Vehicle.belongsTo(Owner, {
+  foreignKey: 'owner_id'
+});
+
+module.exports = { Owner}
