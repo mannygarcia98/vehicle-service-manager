@@ -37,8 +37,8 @@ Vehicle.init(
       type: DataTypes.STRING(30),
       allowNull: false
     },
-    // Vehicle license plate number column defined here
-    license_number: {
+    // Vehicle license plate column defined here
+    license_plate: {
       type: DataTypes.STRING(10),
       allowNull: false
     },
