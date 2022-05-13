@@ -1,6 +1,9 @@
 //GET all Owners
 
-const router = require(".");
+const router = require('express').Router();
+const { Owner, Vehicle } = require('../models');
+
+const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
