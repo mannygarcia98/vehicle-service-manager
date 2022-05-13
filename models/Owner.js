@@ -68,7 +68,6 @@ Owner.init(
         return updatedOwnerData;
       }
     },
-
     // TABLE CONFIGURATION OPTIONS GO HERE
     // pass in our imported sequelize connection (the direct connection to our database)
     sequelize,

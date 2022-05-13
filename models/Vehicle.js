@@ -38,7 +38,7 @@ Vehicle.init(
         max: 4
       }
     },
-    // Vehicle license_plate number column defined here
+    // Vehicle license plate number column defined here
     license_number: {
       type: DataTypes.STRING(10),
       allowNull: false
@@ -51,6 +51,8 @@ Vehicle.init(
         key: 'id'
       }
     },
+  },
+  {
     // TABLE CONFIGURATION OPTIONS GO HERE
     // pass in our imported sequelize connection (the direct connection to our database)
     sequelize,
