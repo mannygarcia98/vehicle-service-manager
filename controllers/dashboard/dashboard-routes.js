@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const { route } = require('../api');
-const { Owner, Vehicle } = require('../models');
+const { Owner, Vehicle } = require('../../models');
 
 const withAuth = require('../utils/auth');
 
 // GET all Owners for dashboard
-router.get('/', async (req, res) => {
+/*router.get('/', async (req, res) => {
     try {
         const dbOwnerdata = await Owner.findAll({
             include: [
@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
-});
+});*/
 
 // GET one owner
 
@@ -49,6 +49,58 @@ router.get('/owner/:id', withAuth, async (req, res) => {
         });
 
         const owner = dbOwnerData.get({ plain: true });
+        res.render('owner', {owner, loggedIn: req.session.loggedIn });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// POST one owner
+
+router.post('/owner/:id', withAuth, async (req, res) => {
+    try {
+        const dbOwnerData = await Owner.findByPk(req.params.id, {
+            include: [
+                {
+                    model: Vehicle,
+                    attributes: [
+                    'year',
+                    'make',
+                    'model',
+                    'license_plate',
+                    ],
+                },
+            ],
+        });
+
+        const owner = dbOwnerData.post({ plain: true });
+        res.render('owner', {owner, loggedIn: req.session.loggedIn });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+//PUT one owner
+
+router.put('/owner/:id', withAuth, async (req, res) => {
+    try {
+        const dbOwnerData = await Owner.findByPk(req.params.id, {
+            include: [
+                {
+                    model: Vehicle,
+                    attributes: [
+                    'year',
+                    'make',
+                    'model',
+                    'license_plate',
+                    ],
+                },
+            ],
+        });
+
+        const owner = dbOwnerData.put({ plain: true });
         res.render('owner', {owner, loggedIn: req.session.loggedIn });
     } catch (err) {
         console.log(err);
