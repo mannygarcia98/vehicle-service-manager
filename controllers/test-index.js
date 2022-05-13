@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
-const dashboardRoutes = require('./dashboard');
-const vehcilesRoutes = require('./vehicles-routes');
+const dashboardRoutes = require('./api');
+const vehcilesRoutes = require('./test-routes.js');
 
 router.use('/', vehcilesRoutes);
-router.use('/dashboard', dashboardRoutes);
+router.use('/api', dashboardRoutes);
 
 module.exports = router;
