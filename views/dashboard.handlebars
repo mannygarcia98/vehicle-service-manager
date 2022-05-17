@@ -6,7 +6,7 @@
     </a>
 
     <div class="col-3 col-md-3 text-end">
-      <button type="button" class="btn btn-outline-primary me-2">Log Out</button>
+      <button type="button" class="btn btn-outline-primary me-2" id="logout">Log Out</button>
     </div>
   </header>
 </div>
@@ -19,13 +19,15 @@
     <div class="col-12 col-md-5 mb-3">
       <div class="row py-2 text-center border border-2 border-dark rounded">
         <p class="col-12">Your Vehicles</p>
-        <p class="col-2">2008</p>
-        <p class="col-3">Ford</p>
-        <p class="col-3">Mustang</p>
+        {{#each vehicle}}
+          <p class="col-2">{{year}}</p>
+          <p class="col-3">{{make}}</p>
+          <p class="col-3">{{model}}</p>
         <a class="col-2 text-muted pe-auto" href="#" data-bs-toggle="modal" data-bs-target="#editVehicle">Edit</a>
-        <a href="#" class="col-2">
+        <a href="#" class="col-2 delete-vehicle">
           <i class="fa-solid fa-trash text-danger"></i>
         </a>
+        {{/each}}
         <div class="d-flex justify-content-center">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVehicle">Add a Vehicle</button>
         </div>
@@ -61,9 +63,8 @@
           <form>
             <select class="form-select mb-3" aria-label="Default select example">
               <option selected>Vehicle</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              {{#each vehicle}}
+              <option value="{{id}}">{{make}} {{model}}</option>
             </select>
             <select class="form-select mb-3" aria-label="Default select example">
               <option selected>Service</option>
@@ -71,12 +72,8 @@
               <option value="2">Oil Change $45</option>
               <option value="3">Coolant Flush $65</option>
             </select>
-            <select class="form-select mb-3" aria-label="Default select example">
-              <option selected>Date</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
+            <label for="appointment-date">Date</label>
+            <input class="form-control" min="2022-05-13" type="date" id="appointmentDate" value="" />
           </form>
         </div>
         <div class="modal-footer">
@@ -96,10 +93,10 @@
         </div>
         <div class="modal-body">
           <form>
-            <input class="form-control mb-3" type="number" placeholder="Year" min="1950" max="2022" />
-            <input class="form-control mb-3" type="text" placeholder="Make" />
-            <input class="form-control mb-3" type="text" placeholder="Model" />
-            <input class="form-control mb-3" type="text" placeholder="License Plate" />
+            <input class="form-control mb-3" id="newVehicleYear" type="number" placeholder="Year" min="1950" max="2022" />
+            <input class="form-control mb-3" id="newVehicleMake" type="text" placeholder="Make" />
+            <input class="form-control mb-3" id="newVehicleModel" type="text" placeholder="Model" />
+            <input class="form-control mb-3" id="newVehicleLicense" type="text" placeholder="License Plate" />
           </form>
         </div>
         <div class="modal-footer">
@@ -119,10 +116,10 @@
         </div>
         <div class="modal-body">
           <form>
-            <input class="form-control mb-3" type="number" placeholder="Year" min="1950" max="2022" />
-            <input class="form-control mb-3" type="text" placeholder="Make" />
-            <input class="form-control mb-3" type="text" placeholder="Model" />
-            <input class="form-control mb-3" type="text" placeholder="License Plate" />
+            <input class="form-control mb-3" id="editYear" type="number" placeholder="Year" min="1950" max="2022" />
+            <input class="form-control mb-3" id="editMake" type="text" placeholder="Make" />
+            <input class="form-control mb-3" id="editModel" type="text" placeholder="Model" />
+            <input class="form-control mb-3" id="editLicense" type="text" placeholder="License Plate" />
           </form>
         </div>
         <div class="modal-footer">
