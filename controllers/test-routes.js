@@ -1,6 +1,7 @@
 const router = require('express').Router();
-
 const { Owner, Vehicle } = require('../models');
+
+const withAuth = require('../utils/auth');
 
 //GET all Owners
 router.get('/owners', async (req, res) => {

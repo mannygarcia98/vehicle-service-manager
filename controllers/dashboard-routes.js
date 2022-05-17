@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { route } = require('../api');
-const { Owner, Vehicle } = require('../../models');
+//const { route } = require('../api');
+const { Owner, Vehicle } = require('../models');
 
 // const withAuth = require('../utils/auth');
 
