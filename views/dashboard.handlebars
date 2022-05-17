@@ -1,0 +1,132 @@
+<!-- Header Start -->
+<div class="container">
+  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-centercol-md-5 mb-2 mb-md-0 text-dark text-decoration-none">
+      <span class="h1 fw-bold">Vehicle Service Manager</span>
+    </a>
+
+    <div class="col-3 col-md-3 text-end">
+      <button type="button" class="btn btn-outline-primary me-2" id="logout">Log Out</button>
+    </div>
+  </header>
+</div>
+<!-- End Header -->
+
+<!-- Vehicles and Services Main -->
+<main class="container">
+  <h3 class="fw-light text-center my-5">Welcome, {{first_name}}. What are we working on today?</h3>
+  <div class="row m-1 pb-5 justify-content-around">
+    <div class="col-12 col-md-5 mb-3">
+      <div class="row py-2 text-center border border-2 border-dark rounded">
+        <p class="col-12">Your Vehicles</p>
+        {{#each vehicle}}
+          <p class="col-2">{{year}}</p>
+          <p class="col-3">{{make}}</p>
+          <p class="col-3">{{model}}</p>
+        <a class="col-2 text-muted pe-auto" href="#" data-bs-toggle="modal" data-bs-target="#editVehicle">Edit</a>
+        <a href="#" class="col-2 delete-vehicle">
+          <i class="fa-solid fa-trash text-danger"></i>
+        </a>
+        {{/each}}
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVehicle">Add a Vehicle</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-3">
+      <div class="row py-2 border border-2 border-dark rounded justify-content-around">
+        <p class="col-12 text-center">Services</p>
+        <p class="col-6">Tire Rotation</p>
+        <p class="col-2">$40</p>
+        <p class="col-6">Oil Change</p>
+        <p class="col-2">$45</p>
+        <p class="col-6">Coolant Flush</p>
+        <p class="col-2">$65</p>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestService">Make an Appointment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<section>
+  <!-- Request Service Modal -->
+  <div class="modal fade" id="requestService" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Request a Service</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <select class="form-select mb-3" aria-label="Default select example">
+              <option selected>Vehicle</option>
+              {{#each vehicle}}
+              <option value="{{id}}">{{make}} {{model}}</option>
+            </select>
+            <select class="form-select mb-3" aria-label="Default select example">
+              <option selected>Service</option>
+              <option value="1">Tire Rotation $40</option>
+              <option value="2">Oil Change $45</option>
+              <option value="3">Coolant Flush $65</option>
+            </select>
+            <label for="appointment-date">Date</label>
+            <input class="form-control" min="2022-05-13" type="date" id="appointmentDate" value="" />
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="submitServiceRequest">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add Vehicle Modal -->
+  <div class="modal fade" id="addVehicle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add a Vehicle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <input class="form-control mb-3" id="newVehicleYear" type="number" placeholder="Year" min="1950" max="2022" />
+            <input class="form-control mb-3" id="newVehicleMake" type="text" placeholder="Make" />
+            <input class="form-control mb-3" id="newVehicleModel" type="text" placeholder="Model" />
+            <input class="form-control mb-3" id="newVehicleLicense" type="text" placeholder="License Plate" />
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="submitNewVehicle">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Vehicle Modal -->
+  <div class="modal fade" id="editVehicle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Vehicle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <input class="form-control mb-3" id="editYear" type="number" placeholder="Year" min="1950" max="2022" />
+            <input class="form-control mb-3" id="editMake" type="text" placeholder="Make" />
+            <input class="form-control mb-3" id="editModel" type="text" placeholder="Model" />
+            <input class="form-control mb-3" id="editLicense" type="text" placeholder="License Plate" />
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="submitVehicleEdit">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
