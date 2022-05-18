@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const res = require('express/lib/response');
 const { Owner } = require('../../models');
 
 router.post('/', async (req, res) => {
@@ -60,6 +61,14 @@ router.post('/logout', (req, res) => {
     } else {
         res.status(404).end();
     }
+});
+
+router.get('/', (req, res) => {
+    res.render('login');
+});
+
+router.get('/logins', (req, res) => {
+    res.render('signup');
 });
 
 module.exports = router;

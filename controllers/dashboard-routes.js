@@ -1,5 +1,5 @@
 const router = require('express').Router();
-//const { route } = require('../api');
+// const { route } = require('../api');
 const { Owner, Vehicle } = require('../models');
 
 // const withAuth = require('../utils/auth');
@@ -50,12 +50,46 @@ router.get('/owner/:id', async (req, res) => {
         });
 
         const owner = dbOwnerData.get({ plain: true });
-        res.render('owner', {owner, loggedIn: req.session.loggedIn });
+
+        res.json(dbOwnerData);
+
+        res.render('dashboard', {owner, loggedIn: req.session.loggedIn });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
 });
+
+// router.get('/owner/:id', (req, res) => {
+//     Owner.findOne({
+//       attributes: { exclude: ['password'] },
+//       where: {
+//         id: req.params.id
+//       },
+//       include:
+//         {
+//           model: Vehicle,
+//           attributes: [
+//             'year',
+//             'make',
+//             'model',
+//             'license_plate',
+//             'owner_id'
+//             ],
+//         },
+//     })
+//     .then(dbOwnerData => {
+//       if (!dbOwnerData) {
+//         res.status(404).json({ message: 'No user found with this id' });
+//         return;
+//       }
+//       res.json(dbOwnerData);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
 
 //PUT one owner
 
@@ -77,7 +111,7 @@ router.put('/owner/:id', async (req, res) => {
         });
 
         const owner = dbOwnerData.put({ plain: true });
-        res.render('owner', {owner, loggedIn: req.session.loggedIn });
+        res.render('dashboard', {owner, loggedIn: req.session.loggedIn });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -91,7 +125,10 @@ router.get('/vehicle/:id', async (req, res) => {
         
         const vehicle = dbVehicleData.get({ plain: true });
 
-        res.render('vehicle', { vehicle, loggedIn: req.session.loggedIn });
+        res.json(dbVehicleData);
+        console.log(dbVehicleData);
+
+        res.render('dashboard', { vehicle, loggedIn: req.session.loggedIn });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -169,6 +206,10 @@ router.get('/logins', (req, res) => {
     }
 
     res.render('logins');
+});
+
+router.get('/', (req, res) => {
+    res.render('dashboard');
 });
 
 module.exports = router;
