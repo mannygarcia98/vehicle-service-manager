@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Owner, Vehicle } = require('../models');
 
-const withAuth = require('../utils/auth');
+// const withAuth = require('../utils/auth');
 
 //GET all Owners
 router.get('/owners', async (req, res) => {
@@ -48,7 +48,7 @@ router.delete('/owner/:id', async (req, res) => {
         });
 
         const owner = dbOwnerData.delete({ plain: true });
-        res.render('owner', {owner, loggedIn: req.session.loggedIn });
+        res.render('dashboard', {owner, loggedIn: req.session.loggedIn });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -63,7 +63,7 @@ router.get('/vehicles', async (req, res) => {
         
         const vehicle = dbVehicleData.get({ plain: true });
 
-        res.render('vehicle', { vehicle, loggedIn: req.session.loggedIn });
+        res.render('dashboard', { vehicle, loggedIn: req.session.loggedIn });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -76,7 +76,7 @@ router.get('/logins', (req, res) => {
         return;
     }
 
-    res.render('logins');
+    res.render('login');
 });
 
 module.exports = router; 
