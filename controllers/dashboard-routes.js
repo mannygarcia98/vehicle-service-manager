@@ -198,10 +198,6 @@ router.delete('/vehicle/:id', (req, res) => {
     });
 });
 
-router.get('/logins', (req, res) => {
-    res.render('logins');
-});
-
 router.get('/', (req, res) => {
     res.render('dashboard');
 });
