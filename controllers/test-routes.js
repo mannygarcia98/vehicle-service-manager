@@ -70,8 +70,4 @@ router.get('/vehicles', async (req, res) => {
     }
 });
 
-router.get('/logins', withAuth, (req, res) => {
-    res.render('login');
-});
-
 module.exports = router; 
