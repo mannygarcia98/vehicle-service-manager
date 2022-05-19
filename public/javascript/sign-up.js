@@ -22,7 +22,7 @@ async function signupFormHandler(event) {
 
     // check the response status
     if (response.ok) {
-      document.location.replace('/dashboard/')
+      document.location.replace('/api/login/logins')
     } else {
       alert(response.statusText);
     }
