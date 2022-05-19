@@ -5,8 +5,13 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+<<<<<<< HEAD
+    "start": "node server.js",
+    "devStart": "nodemon server.js"
+=======
     "watch": "nodemon server.js",
     "start": "node server.js"
+>>>>>>> 701ce9552afec66724392ecedf5432169a38b27a
   },
   "repository": {
     "type": "git",

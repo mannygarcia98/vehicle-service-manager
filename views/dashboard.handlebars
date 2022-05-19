@@ -61,7 +61,7 @@
         </div>
         <div class="modal-body">
           <form>
-            <select class="form-select mb-3" aria-label="Default select example">
+            <select id="" class="form-select mb-3" aria-label="Default select example">
               <option selected>Vehicle</option>
               {{#each vehicle}}
               <option value="{{id}}">{{make}} {{model}}</option>
@@ -78,7 +78,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="submitServiceRequest">Submit</button>
+          <button type="button" class="btn btn-primary" id="submitServiceRequest" data-bs-dismiss="modal">Submit</button>
         </div>
       </div>
     </div>
@@ -101,7 +101,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="submitNewVehicle">Submit</button>
+          <button type="button" class="btn btn-primary" id="submitNewVehicle" data-bs-dismiss="modal">Submit</button>
         </div>
       </div>
     </div>
@@ -124,7 +124,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="submitVehicleEdit">Submit</button>
+          <button type="button" class="btn btn-primary" id="submitVehicleEdit" data-bs-dismiss="modal">Submit</button>
         </div>
       </div>
     </div>
