@@ -99,7 +99,7 @@ router.post('/logins', (req, res) => {
                     return next(err);
                 }
 
-                return res.redirect('/');
+                return res.redirect('/dashboard');
             });
 
         })(req, res, next);
@@ -125,6 +125,10 @@ router.get('/logins', (req, res) => {
 });
 
 router.get('/signup', (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/dashboard');
+        return;
+      }
     res.render('signup');
 });
 
