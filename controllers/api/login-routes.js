@@ -62,7 +62,8 @@ router.post('/signup', async (req, res) => {
 router.post('/logins', (req, res) => {
     Owner.findOne({
         where: {
-            email: req.body.email
+            email: req.body.email,
+            password: req.body.password
         }
     }).then(dbOwnerData => {
         if (!dbOwnerData) {
