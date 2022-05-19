@@ -9,7 +9,7 @@ async function signupFormHandler(event) {
 
   // validation check for all filled forms to then post user
   if (firstName && lastName && email && password) {
-    const response = await fetch('/api/login/', {
+    const response = await fetch('/api/login/signup', {
       method: 'post',
       body: JSON.stringify({
         firstName,
