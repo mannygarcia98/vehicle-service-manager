@@ -23,10 +23,10 @@
           <p class="col-2">{{year}}</p>
           <p class="col-3">{{make}}</p>
           <p class="col-3">{{model}}</p>
-        <a class="col-2 text-muted pe-auto" href="#" data-bs-toggle="modal" data-bs-target="#editVehicle">Edit</a>
-        <a href="#" class="col-2 delete-vehicle">
-          <i id="{{id}}" class="fa-solid fa-trash text-danger"></i>
-        </a>
+          <a class="col-2 text-muted pe-auto" href="#" data-bs-toggle="modal" data-bs-target="#editVehicle">Edit</a>
+          <a href="#" class="col-2 delete-vehicle">
+            <i id="{{id}}" class="fa-solid fa-trash text-danger"></i>
+          </a>
         {{/each}}
         <div class="d-flex justify-content-center">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVehicle">Add a Vehicle</button>
@@ -64,7 +64,8 @@
             <select id="" class="form-select mb-3" aria-label="Default select example">
               <option selected>Vehicle</option>
               {{#each vehicle}}
-              <option value="{{id}}">{{make}} {{model}}</option>
+                <option value="{{id}}">{{make}} {{model}}</option>
+              {{/each}}
             </select>
             <select class="form-select mb-3" aria-label="Default select example">
               <option selected>Service</option>
