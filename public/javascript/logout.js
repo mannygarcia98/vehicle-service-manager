@@ -1,11 +1,11 @@
 async function logout() {
-  const response = await fetch('/api/logout', {
+  const response = await fetch('/api/login/logout', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' }
   });
 
   if (response.ok) {
-    document.location.replace('/');
+    document.location.replace('/api/login/logins');
   } else {
     alert(response.statusText);
   }
