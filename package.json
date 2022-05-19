@@ -5,8 +5,13 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+<<<<<<< HEAD
     "start": "node server.js",
     "devStart": "nodemon server.js"
+=======
+    "watch": "nodemon server.js",
+    "start": "node server.js"
+>>>>>>> 701ce9552afec66724392ecedf5432169a38b27a
   },
   "repository": {
     "type": "git",
@@ -30,7 +35,9 @@
     "express-handlebars": "^6.0.5",
     "express-session": "^1.17.2",
     "mysql2": "^2.3.3",
+    "passport": "^0.5.3",
     "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
     "sequelize": "^6.19.0"
   }
 }

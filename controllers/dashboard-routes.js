@@ -1,8 +1,7 @@
 const router = require('express').Router();
 // const { route } = require('../api');
 const { Owner, Vehicle } = require('../models');
-
-// const withAuth = require('../utils/auth');
+const withAuth = require('../utils/auth');
 
 // GET all Owners for dashboard
 /*router.get('/', async (req, res) => {
@@ -32,7 +31,7 @@ const { Owner, Vehicle } = require('../models');
 
 // GET one owner
 
-router.get('/owner/:id', async (req, res) => {
+router.get('/owner/:id', withAuth, async (req, res) => {
     try {
         const dbOwnerData = await Owner.findByPk(req.params.id, {
             include: [
@@ -119,7 +118,7 @@ router.put('/owner/:id', async (req, res) => {
 });
 
 // GET one vehicle
-router.get('/vehicle/:id', async (req, res) => {
+router.get('/vehicle/:id', withAuth, async (req, res) => {
     try {
         const dbVehicleData = await Vehicle.findByPk(req.params.id);
         
@@ -200,11 +199,6 @@ router.delete('/vehicle/:id', (req, res) => {
 });
 
 router.get('/logins', (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    }
-
     res.render('logins');
 });
 
