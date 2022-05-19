@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Owner, Vehicle } = require('../models');
 
-// const withAuth = require('../utils/auth');
+const withAuth = require('../utils/auth');
 
 //GET all Owners
 router.get('/owners', async (req, res) => {
@@ -68,15 +68,6 @@ router.get('/vehicles', async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
-});
-
-router.get('/logins', (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    }
-
-    res.render('login');
 });
 
 module.exports = router; 

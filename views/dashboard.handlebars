@@ -23,10 +23,10 @@
           <p class="col-2">{{year}}</p>
           <p class="col-3">{{make}}</p>
           <p class="col-3">{{model}}</p>
-        <a class="col-2 text-muted pe-auto" href="#" data-bs-toggle="modal" data-bs-target="#editVehicle">Edit</a>
-        <a href="#" class="col-2 delete-vehicle">
-          <i class="fa-solid fa-trash text-danger"></i>
-        </a>
+          <a class="col-2 text-muted pe-auto" href="#" data-bs-toggle="modal" data-bs-target="#editVehicle">Edit</a>
+          <a href="#" class="col-2 delete-vehicle">
+            <i id="{{id}}" class="fa-solid fa-trash text-danger"></i>
+          </a>
         {{/each}}
         <div class="d-flex justify-content-center">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVehicle">Add a Vehicle</button>
@@ -61,10 +61,11 @@
         </div>
         <div class="modal-body">
           <form>
-            <select class="form-select mb-3" aria-label="Default select example">
+            <select id="" class="form-select mb-3" aria-label="Default select example">
               <option selected>Vehicle</option>
               {{#each vehicle}}
-              <option value="{{id}}">{{make}} {{model}}</option>
+                <option value="{{id}}">{{make}} {{model}}</option>
+              {{/each}}
             </select>
             <select class="form-select mb-3" aria-label="Default select example">
               <option selected>Service</option>
@@ -78,7 +79,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="submitServiceRequest">Submit</button>
+          <button type="button" class="btn btn-primary" id="submitServiceRequest" data-bs-dismiss="modal">Submit</button>
         </div>
       </div>
     </div>
@@ -101,7 +102,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="submitNewVehicle">Submit</button>
+          <button type="button" class="btn btn-primary" id="submitNewVehicle" data-bs-dismiss="modal">Submit</button>
         </div>
       </div>
     </div>
@@ -124,7 +125,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="submitVehicleEdit">Submit</button>
+          <button type="button" class="btn btn-primary" id="submitVehicleEdit" data-bs-dismiss="modal">Submit</button>
         </div>
       </div>
     </div>

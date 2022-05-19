@@ -14,6 +14,8 @@ We built this project to streamline the scheduling of maintenance requests for c
 
 ## Usage
 
+![Dashboard](./public/images/dashboard.png)
+
 add screenshot of project showing usage
 
 
