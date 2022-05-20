@@ -2,6 +2,7 @@ const router = require('express').Router();
 const res = require('express/lib/response');
 const { Owner } = require('../../models');
 const withAuth = require('../../utils/auth');
+const passport = require('passport');
 
 router.post('/signup', async (req, res) => {
     try {
@@ -63,17 +64,16 @@ router.post('/logins', (req, res) => {
     Owner.findOne({
         where: {
             email: req.body.email,
-            password: req.body.password
         }
     }).then(dbOwnerData => {
         if (!dbOwnerData) {
-            res.status(400).json({ message: 'Incorrect email or password. Please try again.' });
+            res.status(400).json({ message: 'No owner with that email exists. Please try again.' });
             return;
         }
 
         const validPassword = dbOwnerData.checkPassword(req.body.password);
         if (!validPassword) {
-            res.status(400).json({ message: 'Incorrect email or password. Please try again.' });
+            res.status(400).json({ message: 'Incorrect password. Please try again.' });
             return;
         }
 
@@ -85,25 +85,27 @@ router.post('/logins', (req, res) => {
             res.status(200).json({ owner: dbOwnerData, message:'You are logged in!'});
         });
 
-        passport.authenticate('local', 
-        (err, user, info) => {
-            if (err) {
-                return next(err);
-            }
+        // passport.authenticate('local', 
+        // (err, user, info) => {
+        //     if (err) {
+        //         return next(err);
+        //     }
         
-            if (!user) {
-                return res.redirect('/logins?info=' + info);
-            }
+        //     if (!user) {
+        //         return res.redirect('/logins?info=' + info);
+        //     }
 
-            req.logIn(user, function(err) {
-                if (err) {
-                    return next(err);
-                }
+        //     req.logIn(user, function(err) {
+        //         if (err) {
+        //             return next(err);
+        //         }
 
-                return res.redirect('/dashboard');
-            });
+        //         return res.redirect('/dashboard');
+        //     });
 
-        })(req, res, next);
+        // })(req, res, next);
+        res.redirect('/dashboard/owner/:id');
+        return;
     });
 });
 
@@ -119,7 +121,7 @@ router.post('/logout', (req, res) => {
 
 router.get('/logins', (req, res) => {
     if (req.session.loggedIn) {
-        res.redirect('/dashboard');
+        res.redirect('/dashboard/owner/:id');
         return;
       }
     res.render('login');
@@ -127,7 +129,7 @@ router.get('/logins', (req, res) => {
 
 router.get('/signup', (req, res) => {
     if (req.session.loggedIn) {
-        res.redirect('/dashboard');
+        res.redirect('/dashboard/owner/:id');
         return;
       }
     res.render('signup');
