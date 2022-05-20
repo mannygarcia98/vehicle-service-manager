@@ -199,7 +199,21 @@ router.delete('/vehicle/:id', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('dashboard');
+    Owner.findOne({
+        where: {
+            id: 1
+        },
+        attributes: ["id", "first_name", "last_name", "email"],
+        include: [
+            {
+                model: Vehicle,
+                attributes: ["id", "year", "make", "model", "license_plate", "owner_id"]
+            }
+        ]
+    }).then(dbOwnerData => {
+        res.render('dashboard', dbOwnerData.get({ plain: true }))
+        console.log(dbOwnerData.get({ plain: true }));
+    });
 });
 
 module.exports = router;
