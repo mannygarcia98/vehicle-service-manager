@@ -79,16 +79,16 @@ router.post('/logins', (req, res) => {
 
         req.session.save(() => {
             req.session.user_id = dbOwnerData.id;
-            req.session.username = dbOwnerData.email;
+            req.session.username = dbOwnerData.username;
             req.session.loggedIn = true;
 
-            res.status(200).json({ owner: dbOwnerData, message:'You are logged in!'});
+            res.status(200).json({ user: dbOwnerData, message:'You are logged in!'});
         });
 
         // passport.authenticate('local', 
         // (err, user, info) => {
         //     if (err) {
-        //         return next(err);
+        //         return (err);
         //     }
         
         //     if (!user) {
@@ -97,15 +97,14 @@ router.post('/logins', (req, res) => {
 
         //     req.logIn(user, function(err) {
         //         if (err) {
-        //             return next(err);
+        //             return (err);
         //         }
 
         //         return res.redirect('/dashboard');
         //     });
 
         // })(req, res, next);
-        res.redirect('/dashboard/owner/:id');
-        return;
+        res.redirect('/dashboard/');
     });
 });
 
@@ -121,7 +120,7 @@ router.post('/logout', (req, res) => {
 
 router.get('/logins', (req, res) => {
     if (req.session.loggedIn) {
-        res.redirect('/dashboard/owner/:id');
+        res.redirect('/dashboard/');
         return;
       }
     res.render('login');

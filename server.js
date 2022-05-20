@@ -40,9 +40,7 @@ passport.deserializeUser(function(id, done) {
 // Before authenticating requests, the strategy must be configured
 passport.use(new LocalStrategy({
   // usernameField is 'email' on this site
-  usernameField: 'email',
-  // session support not necessary with passport installed
-  session: false
+  usernameField: 'email'
 },
   function(username, password, done) {
     Owner.findOne({ username: username }, function (err, owner) {
