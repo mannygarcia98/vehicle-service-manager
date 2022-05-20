@@ -16,9 +16,6 @@ We built this project to streamline the scheduling of maintenance requests for c
 
 ![Dashboard](./public/images/dashboard.png)
 
-add screenshot of project showing usage
-
-
 ## Credits
 
 Manny Garcia  gitHub: mannygarcia98
