@@ -1,16 +1,20 @@
-async function deleteFormHandler() {
-  //need to figure out a way to determine which delete button was clicked
-  const id = document.querySelector("#id");
-
-  const response = await fetch(`/vehicle/${id}`, {
+async function deleteFormHandler(e) {
+  let target = e.target;
+  id = target.getAttribute("id");
+  console.log(id);
+  const response = await fetch(`/dashboard/vehicle/${id}`, {
     method: "DELETE",
   });
 
   if (response.ok) {
-    // document.location.replace("/");
+    document.location.replace("/dashboard");
   } else {
     alert(response.statusText);
   }
 }
 
-document.querySelector(".delete-vehicle").addEventListener("click", deleteFormHandler);
+const deleteButton = document.querySelectorAll(".fa-trash");
+
+deleteButton.forEach((element) => {
+  element.addEventListener("click", deleteFormHandler);
+});

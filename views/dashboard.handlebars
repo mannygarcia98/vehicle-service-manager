@@ -23,9 +23,9 @@
           <p class="col-2">{{year}}</p>
           <p class="col-3">{{make}}</p>
           <p class="col-3">{{model}}</p>
-          <a class="col-2 text-muted pe-auto" href="#" data-bs-toggle="modal" data-bs-target="#editVehicle">Edit</a>
+          <a class="col-2 text-muted pe-auto editButton" href="#" data-bs-toggle="modal" data-bs-target="#editVehicle" id="{{id}}">Edit</a>
           <a href="#" class="col-2 delete-vehicle">
-            <i id="{{id}}" class="fa-solid fa-trash text-danger"></i>
+            <i class="fa-solid fa-trash text-danger" id="{{id}}"></i>
           </a>
         {{/each}}
         <div class="d-flex justify-content-center">
@@ -62,8 +62,8 @@
         <div class="modal-body">
           <form>
             <select id="" class="form-select mb-3" aria-label="Default select example">
-              <option selected>Vehicle</option>
-              {{#each vehicle}}
+              <option selected disabled>Vehicle</option>
+              {{#each vehicles}}
                 <option value="{{id}}">{{make}} {{model}}</option>
               {{/each}}
             </select>
