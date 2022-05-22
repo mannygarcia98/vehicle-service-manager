@@ -26,6 +26,9 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+router.get("/", (req, res) => {
+  res.send("hello");
+});
 // router.post('/logins', async (req, res) => {
 //     try {
 //         const dbOwnerData = await Owner.findOne({
@@ -86,29 +89,36 @@ router.post("/logins", (req, res) => {
 
       res.status(200).json({ user: dbOwnerData, message: "You are logged in!" });
     });
-
-    // passport.authenticate('local',
-    // (err, user, info) => {
-    //     if (err) {
-    //         return (err);
-    //     }
-
-    //     if (!user) {
-    //         return res.redirect('/logins?info=' + info);
-    //     }
-
-    //     req.logIn(user, function(err) {
-    //         if (err) {
-    //             return (err);
-    //         }
-
-    //         return res.redirect('/dashboard');
-    //     });
-
     // })(req, res, next);
     res.redirect("/dashboard/");
   });
 });
+
+// Login
+router.post("/", (req, res, next) => {
+  passport.authenticate("local", {
+    successRedirect: "/dashboard",
+    failureRedirect: "/",
+    // failureFlash: true,
+  })(req, res, next);
+});
+// passport.authenticate('local',
+// (err, user, info) => {
+//     if (err) {
+//         return (err);
+//     }
+
+//     if (!user) {
+//         return res.redirect('/logins?info=' + info);
+//     }
+
+//     req.logIn(user, function(err) {
+//         if (err) {
+//             return (err);
+//         }
+
+//         return res.redirect('/dashboard');
+//     });
 
 router.post("/logout", (req, res) => {
   if (req.session.loggedIn) {

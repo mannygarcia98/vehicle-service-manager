@@ -2,7 +2,7 @@ const router = require("express").Router();
 // const { route } = require('../api');
 const { Owner, Vehicle } = require("../models");
 // const withAuth = require("../utils/auth");
-const withAuth = require("../utils/authenticated.js");
+const withAuth = require("../utils/auth.js");
 
 // GET all Owners for dashboard
 /*router.get('/', async (req, res) => {
