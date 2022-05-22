@@ -3,23 +3,25 @@ async function newVehicleHandler() {
   const make = document.querySelector("#newVehicleMake").value;
   const model = document.querySelector("#newVehicleModel").value;
   const license_plate = document.querySelector("#newVehicleLicense").value;
-  console.log(`${year} ${make} ${model} ${license_plate}`);
+  const owner_id = 1;
+  console.log(`${year} ${make} ${model} ${license_plate} ${owner_id}`);
 
-  const response = await fetch(`/vehicle`, {
+  const response = await fetch(`/dashboard/vehicle`, {
     method: "POST",
     body: JSON.stringify({
       year,
       make,
       model,
       license_plate,
+      owner_id,
     }),
-    header: {
+    headers: {
       "Content-Type": "application/json",
     },
   });
 
   if (response.ok) {
-    alert("vehicle added");
+    document.location.replace("/dashboard");
   } else {
     alert(response.statusText);
   }
