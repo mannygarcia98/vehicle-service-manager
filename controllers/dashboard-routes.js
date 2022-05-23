@@ -6,30 +6,41 @@ const withAuth = require("../utils/auth");
 const { ensureAuthenticated } = require("../config/auth");
 
 // GET all Owners for dashboard
-/*router.get('/', async (req, res) => {
-    try {
-        const dbOwnerdata = await Owner.findAll({
-            include: [
-                {
-                    model: Vehicle,
-                    attributes: ['make', 'model', 'license#'],
-                },
-            ],
-        });
+// router.get('/owners', async (req, res) => {
+//     try {
+//         const dbOwnerdata = await Owner.findAll({
+//             include: [
+//                 {
+//                     model: Vehicle,
+//                     attributes: ['make', 'model', 'license#'],
+//                 },
+//             ],
+//         });
 
-        const owners = dbOwnerData.map((owner) => 
-        owner.get({ plain: true })
-        );
+//         const owners = dbOwnerData.map((owner) =>
+//         owner.get({ plain: true })
+//         );
 
-        res.render('dashboard', {
-            owners,
-            loggedIn: req.session.loggedIn,
-        });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-});*/
+//         res.render('dashboard', {
+//             owners,
+//             loggedIn: req.session.loggedIn,
+//         });
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).json(err);
+//     }
+// });
+
+// /api/owners
+router.get("/owners", (req, res) => {
+  Owner.findAll({
+    // attributes: { exclude: ["password"] },
+  })
+    .then((dbUserData) => res.json(dbUserData))
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
 
 // GET one owner
 
