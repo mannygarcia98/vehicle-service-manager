@@ -19,7 +19,8 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 // Express Session
 const sess = {
   secret: process.env.SESS_SECRET,
-  resave: true,
+  cookie: {},
+  resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
     db: sequelize,
