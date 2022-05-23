@@ -31,7 +31,7 @@ const { ensureAuthenticated } = require("../config/auth");
 //     }
 // });
 
-// /api/owners
+// /dashboard/owners
 router.get("/owners", (req, res) => {
   Owner.findAll({
     // attributes: { exclude: ["password"] },

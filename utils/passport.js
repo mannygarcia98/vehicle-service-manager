@@ -1,4 +1,4 @@
-const LocalStrategy = require('passport-local').Strategy;
+/* const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
 // Load Owner Model
@@ -45,3 +45,53 @@ module.exports = (passport) => {
       });
   });
 }
+*/
+
+const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcrypt");
+
+// Load User model
+const Owner = require("../models/Owner");
+
+module.exports = function (passport) {
+  passport.use(
+    new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
+      // Match user
+      Owner.findOne({
+        // email: email,
+        where: {
+          email: email,
+        },
+      }).then((user) => {
+        if (!user) {
+          return done(null, false, { message: "That email is not registered" });
+        }
+
+        // Match password
+        bcrypt.compare(password, user.password, (err, isMatch) => {
+          if (err) throw err;
+          if (isMatch) {
+            return done(null, user);
+          } else {
+            return done(null, false, { message: "Password incorrect" });
+          }
+        });
+      });
+    })
+  );
+
+  passport.serializeUser(function (user, done) {
+    done(null, user.id);
+  });
+
+  passport.deserializeUser(function (id, done) {
+    Owner.findByPk(id)
+      .then(function (user) {
+        done(null, user);
+        console.log("deserialized");
+      })
+      .catch(function (err) {
+        done(err, null);
+      });
+  });
+};
