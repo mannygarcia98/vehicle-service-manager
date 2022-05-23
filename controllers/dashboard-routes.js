@@ -187,10 +187,10 @@ router.delete("/vehicle/:id", (req, res) => {
     });
 });
 
-router.get("/", (req, res) => {
+router.get("/", withAuth, (req, res) => {
   Owner.findOne({
     where: {
-      id: 1,
+      email: req.user.email,
     },
     attributes: ["id", "first_name", "last_name", "email"],
     include: [
@@ -201,7 +201,6 @@ router.get("/", (req, res) => {
     ],
   }).then((dbOwnerData) => {
     res.render("dashboard", dbOwnerData.get({ plain: true }));
-    console.log(dbOwnerData.get({ plain: true }));
   });
 });
 
