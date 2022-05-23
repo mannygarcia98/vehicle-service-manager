@@ -3,23 +3,19 @@ const res = require("express/lib/response");
 const { Owner } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-const passport = require('passport');
+const passport = require("passport");
 
 // Signup Handle
-router.post("/signup", async (req, res) => {
-  try {
-    const dbOwnerData = await Owner.create({
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      email: req.body.email,
-      password: req.body.password,
-    });
-
-    res.status(200).json(dbOwnerData);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+router.post("/signup", (req, res) => {
+  Owner.create({
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    password: req.body.password,
+  }).then(() => {
+    console.log("logged in");
+    res.redirect("/");
+  });
 });
 
 // router.post('/logins', async (req, res) => {
@@ -60,12 +56,12 @@ router.post("/signup", async (req, res) => {
 
 // Login Handle
 router.post("/logins", (req, res, next) => {
-  passport.authenticate('local', {
+  passport.authenticate("local", {
     successRedirect: "/dashboard",
-    failureRedirect: "/logins"
+    failureRedirect: "api/login/logins",
   })(req, res, next);
 
-  return res.status(200).json
+  return res.status(200).json;
 });
 
 // Logout Handle

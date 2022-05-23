@@ -3,7 +3,8 @@ async function newVehicleHandler() {
   const make = document.querySelector("#newVehicleMake").value;
   const model = document.querySelector("#newVehicleModel").value;
   const license_plate = document.querySelector("#newVehicleLicense").value;
-  const owner_id = 1;
+  const owner_id = document.querySelector("#owner_id").innerHTML;
+  // const owner_id =;
   console.log(`${year} ${make} ${model} ${license_plate} ${owner_id}`);
 
   const response = await fetch(`/dashboard/vehicle`, {
@@ -22,6 +23,7 @@ async function newVehicleHandler() {
 
   if (response.ok) {
     document.location.replace("/dashboard");
+    // console.log("ok");
   } else {
     alert(response.statusText);
   }

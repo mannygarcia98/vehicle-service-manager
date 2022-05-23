@@ -1,8 +1,9 @@
 const router = require("express").Router();
 // const { route } = require('../api');
 const { Owner, Vehicle } = require("../models");
-// const withAuth = require("../utils/auth");
-const withAuth = require("../utils/authenticated.js");
+const withAuth = require("../utils/auth");
+// const withAuth = require("../utils/authenticated.js");
+const { ensureAuthenticated } = require("../config/auth");
 
 // GET all Owners for dashboard
 /*router.get('/', async (req, res) => {
@@ -188,6 +189,26 @@ router.delete("/vehicle/:id", (req, res) => {
 });
 
 router.get("/", withAuth, (req, res) => {
+  Owner.findOne({
+    where: {
+      email: req.user.email,
+    },
+    attributes: ["id", "first_name", "last_name", "email"],
+    include: [
+      {
+        model: Vehicle,
+        attributes: ["id", "year", "make", "model", "license_plate", "owner_id"],
+      },
+    ],
+  }).then((dbOwnerData) => {
+    res.render("dashboard", dbOwnerData.get({ plain: true }));
+  });
+});
+
+router.get("/", ensureAuthenticated, (req, res) => {
+  // res.render("dashboard");
+  // res.send("dashboard");
+
   Owner.findOne({
     where: {
       email: req.user.email,

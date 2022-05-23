@@ -1,14 +1,14 @@
 // import npm packages
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
-const bcrypt = require('bcrypt');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
+const bcrypt = require("bcrypt");
 
 // create our Owner model
 class Owner extends Model {
   // set up method to run on instance data (per Owner) to check password
-  checkPassword(loginPw) {
-    return bcrypt.compareSync(loginPw, this.password);
-  }
+  // checkPassword(loginPw) {
+  //   return bcrypt.compareSync(loginPw, this.password);
+  // }
 }
 
 // define table columns and configuration
@@ -23,17 +23,17 @@ Owner.init(
       // instruct that this is the Primary Key
       primaryKey: true,
       // turn on auto increment
-      autoIncrement: true
+      autoIncrement: true,
     },
     // Owner first name column defined here
     first_name: {
       type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: false,
     },
     // Owner last name column defined here
     last_name: {
       type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: false,
     },
     // email column defined here
     email: {
@@ -42,8 +42,8 @@ Owner.init(
       // there cannot be any duplicate email values in this table
       unique: true,
       validate: {
-        isEmail: true
-      }
+        isEmail: true,
+      },
     },
     // password column defined here
     password: {
@@ -51,9 +51,9 @@ Owner.init(
       allowNull: false,
       validate: {
         // this means the password must be at least four characters long
-        len: [4]
-      }
-    }
+        len: [4],
+      },
+    },
   },
   {
     hooks: {
@@ -62,11 +62,11 @@ Owner.init(
         newOwnerData.password = await bcrypt.hash(newOwnerData.password, 10);
         return newOwnerData;
       },
-    // set up beforeUpdate lifecycle "hook" functionality
+      // set up beforeUpdate lifecycle "hook" functionality
       async beforeUpdate(updatedOwnerData) {
         updatedOwnerData.password = await bcrypt.hash(updatedOwnerData.password, 10);
         return updatedOwnerData;
-      }
+      },
     },
     // TABLE CONFIGURATION OPTIONS GO HERE
     // pass in our imported sequelize connection (the direct connection to our database)
@@ -78,7 +78,7 @@ Owner.init(
     // use underscores instead of camel-casing (i.e. `comment_text` and not `commentText`)
     underscored: true,
     // make it so our model name stays lowercase in the database
-    modelName: 'owner'
+    modelName: "owner",
   }
 );
 

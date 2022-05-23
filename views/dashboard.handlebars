@@ -27,6 +27,7 @@
           <a href="#" class="col-2 delete-vehicle">
             <i class="fa-solid fa-trash text-danger" id="{{id}}"></i>
           </a>
+          <p class="owner_id" style="display:none;" value="{{owner_id}}">{{owner_id}}</p>
         {{/each}}
         <div class="d-flex justify-content-center">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVehicle">Add a Vehicle</button>
@@ -48,6 +49,7 @@
       </div>
     </div>
   </div>
+  <p style="display:none" id="owner_id" value="{{id}}">{{id}}</p>
 </main>
 
 <section>
