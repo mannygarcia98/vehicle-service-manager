@@ -7,15 +7,42 @@ const passport = require("passport");
 
 // Signup Handle
 router.post("/signup", (req, res) => {
-  Owner.create({
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    email: req.body.email,
-    password: req.body.password,
-  }).then(() => {
-    console.log("logged in");
-    res.redirect("/");
+  let errors = [];
+
+  Owner.findOne({
+    where: {
+      email: req.body.email,
+    },
+  }).then((user) => {
+    if (user) {
+      // errors.push({ msg: "Email already exits" });
+      const message = "Email already exists";
+      console.log("Email already exits");
+      // res.render("signup", {
+      //   // email: message,
+      // });
+    } else {
+      Owner.create({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: req.body.email,
+        password: req.body.password,
+      }).then(() => {
+        console.log("logged in");
+        res.redirect("/");
+      });
+    }
   });
+
+  // Owner.create({
+  //   first_name: req.body.first_name,
+  //   last_name: req.body.last_name,
+  //   email: req.body.email,
+  //   password: req.body.password,
+  // }).then(() => {
+  //   console.log("logged in");
+  //   res.redirect("/");
+  // });
 });
 
 // router.post('/logins', async (req, res) => {
