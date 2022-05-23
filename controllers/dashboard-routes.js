@@ -31,7 +31,6 @@ const withAuth = require("../utils/auth.js");
 });*/
 
 // GET one owner
-
 router.get("/owner/:id", withAuth, async (req, res) => {
   try {
     const dbOwnerData = await Owner.findByPk(req.params.id, {

@@ -6,24 +6,36 @@ const withAuth = require("../../utils/auth");
 
 const passport = require("passport");
 
-router.post("/signup", async (req, res) => {
-  try {
-    const dbOwnerData = await Owner.create({
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      email: req.body.email,
-      password: req.body.password,
-    });
+// router.post("/signup", async (req, res) => {
+//   try {
+//     const dbOwnerData = await Owner.create({
+//       first_name: req.body.first_name,
+//       last_name: req.body.last_name,
+//       email: req.body.email,
+//       password: req.body.password,
+//     });
 
-    req.session.save(() => {
-      req.session.loggedIn = true;
+//     req.session.save(() => {
+//       req.session.loggedIn = true;
 
-      res.status(200).json(dbOwnerData);
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+//       res.status(200).json(dbOwnerData);
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
+
+router.post("/signup", (req, res) => {
+  Owner.create({
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    password: req.body.password,
+  }).then(() => {
+    console.log("registration successful");
+    res.redirect("/");
+  });
 });
 
 router.get("/", (req, res) => {
