@@ -4,5 +4,5 @@ async function appointmentFormHandler() {
   const date = document.querySelector("#appointmentDate").value;
   console.log(`${vehicle} ${service} ${date}`);
 }
-
+appointmentDate.min = new Date().toLocaleDateString("en-ca");
 document.querySelector("#submitServiceRequest").addEventListener("click", appointmentFormHandler);

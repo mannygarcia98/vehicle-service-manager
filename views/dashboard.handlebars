@@ -27,7 +27,7 @@
           <a href="#" class="col-2 delete-vehicle">
             <i class="fa-solid fa-trash text-danger" id="{{id}}"></i>
           </a>
-          <p class="owner_id" style="display:none;" value="{{owner_id}}">{{owner_id}}</p>
+
         {{/each}}
         <div class="d-flex justify-content-center">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVehicle">Add a Vehicle</button>
@@ -70,13 +70,13 @@
               {{/each}}
             </select>
             <select class="form-select mb-3" aria-label="Default select example">
-              <option selected>Service</option>
+              <option selected disabled>Service</option>
               <option value="1">Tire Rotation $40</option>
               <option value="2">Oil Change $45</option>
               <option value="3">Coolant Flush $65</option>
             </select>
             <label for="appointment-date">Date</label>
-            <input class="form-control" min="2022-05-13" type="date" id="appointmentDate" value="" />
+            <input class="form-control" type="date" id="appointmentDate" value="" />
           </form>
         </div>
         <div class="modal-footer">
