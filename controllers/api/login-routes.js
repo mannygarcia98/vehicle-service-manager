@@ -58,7 +58,7 @@ router.post("/signup", (req, res) => {
 router.post("/logins", (req, res, next) => {
   passport.authenticate("local", {
     successRedirect: "/dashboard",
-    failureRedirect: "api/login/logins",
+    failureRedirect: "/",
   })(req, res, next);
 
   return res.status(200).json;
