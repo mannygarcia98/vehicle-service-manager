@@ -18,6 +18,7 @@ router.post("/signup", (req, res) => {
       // errors.push({ msg: "Email already exits" });
       const message = "Email already exists";
       console.log("Email already exits");
+      return;
       // res.render("signup", {
       //   // email: message,
       // });
