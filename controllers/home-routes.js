@@ -1,29 +1,12 @@
 const router = require("express").Router();
-// const sequelize = require("../config/connection");
-// const { Owner } = require("../models");
+const { forwardAuthenticated } = require("../config/auth");
 
-router.get("/", (req, res) => {
-  // if (req.session.loggedIn) {
-  //   res.redirect("/dashboard");
-  //   return;
-  // }
+router.get("/", forwardAuthenticated, (req, res) => {
   res.render("login");
 });
 
-router.get("/signup", (req, res) => {
-  // if (req.session.loggedIn) {
-  //   res.redirect("/dashboard");
-  //   return;
-  // }
+router.get("/signup", forwardAuthenticated, (req, res) => {
   res.render("signup");
 });
-
-// router.get("*", (req, res) => {
-//   if (req.session.loggedIn) {
-//     res.redirect("/dashboard");
-//     return;
-//   }
-//   res.render("login");
-// });
 
 module.exports = router;

@@ -1,38 +1,21 @@
 const router = require("express").Router();
-// const { route } = require('../api');
 const { Owner, Vehicle } = require("../models");
-// const withAuth = require("../utils/auth");
-const withAuth = require("../utils/authenticated.js");
+const { ensureAuthenticated } = require("../config/auth");
 
-// GET all Owners for dashboard
-/*router.get('/', async (req, res) => {
-    try {
-        const dbOwnerdata = await Owner.findAll({
-            include: [
-                {
-                    model: Vehicle,
-                    attributes: ['make', 'model', 'license#'],
-                },
-            ],
-        });
-
-        const owners = dbOwnerData.map((owner) => 
-        owner.get({ plain: true })
-        );
-
-        res.render('dashboard', {
-            owners,
-            loggedIn: req.session.loggedIn,
-        });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-});*/
+// /dashboard/owners
+router.get("/owners", (req, res) => {
+  Owner.findAll({
+    // attributes: { exclude: ["password"] },
+  })
+    .then((dbUserData) => res.json(dbUserData))
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
 
 // GET one owner
 
-router.get("/owner/:id", withAuth, async (req, res) => {
+router.get("/owner/:id", ensureAuthenticated, async (req, res) => {
   try {
     const dbOwnerData = await Owner.findByPk(req.params.id, {
       include: [
@@ -53,37 +36,6 @@ router.get("/owner/:id", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-// router.get('/owner/:id', (req, res) => {
-//     Owner.findOne({
-//       attributes: { exclude: ['password'] },
-//       where: {
-//         id: req.params.id
-//       },
-//       include:
-//         {
-//           model: Vehicle,
-//           attributes: [
-//             'year',
-//             'make',
-//             'model',
-//             'license_plate',
-//             'owner_id'
-//             ],
-//         },
-//     })
-//     .then(dbOwnerData => {
-//       if (!dbOwnerData) {
-//         res.status(404).json({ message: 'No user found with this id' });
-//         return;
-//       }
-//       res.json(dbOwnerData);
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.status(500).json(err);
-//     });
-// });
 
 //PUT one owner
 
@@ -107,7 +59,7 @@ router.put("/owner/:id", async (req, res) => {
 });
 
 // GET one vehicle
-router.get("/vehicle/:id", withAuth, async (req, res) => {
+router.get("/vehicle/:id", ensureAuthenticated, async (req, res) => {
   try {
     const dbVehicleData = await Vehicle.findByPk(req.params.id);
 
@@ -187,7 +139,24 @@ router.delete("/vehicle/:id", (req, res) => {
     });
 });
 
-router.get("/", withAuth, (req, res) => {
+router.get("/", ensureAuthenticated, (req, res) => {
+  Owner.findOne({
+    where: {
+      email: req.user.email,
+    },
+    attributes: ["id", "first_name", "last_name", "email"],
+    include: [
+      {
+        model: Vehicle,
+        attributes: ["id", "year", "make", "model", "license_plate", "owner_id"],
+      },
+    ],
+  }).then((dbOwnerData) => {
+    res.render("dashboard", dbOwnerData.get({ plain: true }));
+  });
+});
+
+router.get("/", ensureAuthenticated, (req, res) => {
   Owner.findOne({
     where: {
       email: req.user.email,

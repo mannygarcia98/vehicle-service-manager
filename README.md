@@ -18,14 +18,12 @@ We built this project to streamline the scheduling of maintenance requests for c
 
 ## Credits
 
-Manny Garcia  gitHub: mannygarcia98
+Manny Garcia gitHub: mannygarcia98
 
 Mitchell Frey gitHub: mfcodingbc
 
 Jermaine Walters gitHub: walte1jj
 
-
-
 ## How to Contribute
 
-add future plans
+[] Flash alerts for login/logout operations
