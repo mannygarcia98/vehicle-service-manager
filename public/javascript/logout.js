@@ -5,13 +5,6 @@ async function logout() {
   });
 
   document.location.replace("/");
-
-  // if (response.ok) {
-  //   document.location.replace("/api/login/logins");
-  //   console.log("logged out");
-  // } else {
-  //   alert(response.statusText);
-  // }
 }
 
 document.querySelector("#logout").addEventListener("click", logout);

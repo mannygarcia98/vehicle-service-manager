@@ -23,10 +23,4 @@ async function loginFormHandler(event) {
   }
 }
 
-// const loginFormHandler = function (event) {
-//   event.preventDefault();
-//   console.log("click");
-//   document.location.replace("/dashboard");
-// };
-
 document.querySelector("#loginSubmit").addEventListener("click", loginFormHandler);
