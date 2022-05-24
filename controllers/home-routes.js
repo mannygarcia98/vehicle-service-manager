@@ -1,8 +1,9 @@
 const router = require("express").Router();
 // const sequelize = require("../config/connection");
 // const { Owner } = require("../models");
+const { forwardAuthenticated } = require("../config/auth");
 
-router.get("/", (req, res) => {
+router.get("/", forwardAuthenticated, (req, res) => {
   // if (req.session.loggedIn) {
   //   res.redirect("/dashboard");
   //   return;
@@ -10,7 +11,7 @@ router.get("/", (req, res) => {
   res.render("login");
 });
 
-router.get("/signup", (req, res) => {
+router.get("/signup", forwardAuthenticated, (req, res) => {
   // if (req.session.loggedIn) {
   //   res.redirect("/dashboard");
   //   return;

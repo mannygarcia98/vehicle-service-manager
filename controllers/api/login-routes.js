@@ -3,23 +3,46 @@ const res = require("express/lib/response");
 const { Owner } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-const passport = require('passport');
+const passport = require("passport");
 
 // Signup Handle
-router.post("/signup", async (req, res) => {
-  try {
-    const dbOwnerData = await Owner.create({
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      email: req.body.email,
-      password: req.body.password,
-    });
+router.post("/signup", (req, res) => {
+  let errors = [];
 
-    res.status(200).json(dbOwnerData);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+  Owner.findOne({
+    where: {
+      email: req.body.email,
+    },
+  }).then((user) => {
+    if (user) {
+      // errors.push({ msg: "Email already exits" });
+      const message = "Email already exists";
+      console.log("Email already exits");
+      // res.render("signup", {
+      //   // email: message,
+      // });
+    } else {
+      Owner.create({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: req.body.email,
+        password: req.body.password,
+      }).then(() => {
+        console.log("logged in");
+        res.redirect("/");
+      });
+    }
+  });
+
+  // Owner.create({
+  //   first_name: req.body.first_name,
+  //   last_name: req.body.last_name,
+  //   email: req.body.email,
+  //   password: req.body.password,
+  // }).then(() => {
+  //   console.log("logged in");
+  //   res.redirect("/");
+  // });
 });
 
 // router.post('/logins', async (req, res) => {
@@ -60,12 +83,12 @@ router.post("/signup", async (req, res) => {
 
 // Login Handle
 router.post("/logins", (req, res, next) => {
-  passport.authenticate('local', {
+  passport.authenticate("local", {
     successRedirect: "/dashboard",
-    failureRedirect: "/logins"
+    failureRedirect: "/",
   })(req, res, next);
 
-  return res.status(200).json
+  return res.status(200).json;
 });
 
 // Logout Handle

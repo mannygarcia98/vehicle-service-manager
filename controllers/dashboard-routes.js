@@ -1,34 +1,46 @@
 const router = require("express").Router();
 // const { route } = require('../api');
 const { Owner, Vehicle } = require("../models");
-// const withAuth = require("../utils/auth");
-const withAuth = require("../utils/authenticated.js");
+const withAuth = require("../utils/auth");
+// const withAuth = require("../utils/authenticated.js");
+const { ensureAuthenticated } = require("../config/auth");
 
 // GET all Owners for dashboard
-/*router.get('/', async (req, res) => {
-    try {
-        const dbOwnerdata = await Owner.findAll({
-            include: [
-                {
-                    model: Vehicle,
-                    attributes: ['make', 'model', 'license#'],
-                },
-            ],
-        });
+// router.get('/owners', async (req, res) => {
+//     try {
+//         const dbOwnerdata = await Owner.findAll({
+//             include: [
+//                 {
+//                     model: Vehicle,
+//                     attributes: ['make', 'model', 'license#'],
+//                 },
+//             ],
+//         });
 
-        const owners = dbOwnerData.map((owner) => 
-        owner.get({ plain: true })
-        );
+//         const owners = dbOwnerData.map((owner) =>
+//         owner.get({ plain: true })
+//         );
 
-        res.render('dashboard', {
-            owners,
-            loggedIn: req.session.loggedIn,
-        });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-});*/
+//         res.render('dashboard', {
+//             owners,
+//             loggedIn: req.session.loggedIn,
+//         });
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).json(err);
+//     }
+// });
+
+// /dashboard/owners
+router.get("/owners", (req, res) => {
+  Owner.findAll({
+    // attributes: { exclude: ["password"] },
+  })
+    .then((dbUserData) => res.json(dbUserData))
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
 
 // GET one owner
 
@@ -188,6 +200,26 @@ router.delete("/vehicle/:id", (req, res) => {
 });
 
 router.get("/", withAuth, (req, res) => {
+  Owner.findOne({
+    where: {
+      email: req.user.email,
+    },
+    attributes: ["id", "first_name", "last_name", "email"],
+    include: [
+      {
+        model: Vehicle,
+        attributes: ["id", "year", "make", "model", "license_plate", "owner_id"],
+      },
+    ],
+  }).then((dbOwnerData) => {
+    res.render("dashboard", dbOwnerData.get({ plain: true }));
+  });
+});
+
+router.get("/", ensureAuthenticated, (req, res) => {
+  // res.render("dashboard");
+  // res.send("dashboard");
+
   Owner.findOne({
     where: {
       email: req.user.email,

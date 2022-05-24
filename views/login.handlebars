@@ -7,25 +7,25 @@
             <div class="row justify-content-center">
               <h1 class="text-center fw-bold">Vehicle Service Manager</h1>
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                <form class="mx-1 mx-md-4 mt-5" id="login-form">
+                <form action="api/login/logins" method="POST" class="mx-1 mx-md-4 mt-5" id="login-form">
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="email-login" class="form-control" />
-                      <label class="form-label" for="email-login">Email</label>
+                      <input type="email" id="email-login" class="form-control" name="email" />
+                      <label class="form-label" for="email">Email</label>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="password-login" class="form-control" />
-                      <label class="form-label" for="password-login">Password</label>
+                      <input type="password" id="password-login" class="form-control" name="password" />
+                      <label class="form-label" for="password">Password</label>
                     </div>
                   </div>
 
                   <div class="form-check d-flex justify-content-center mb-5">
-                    <p>Don't have an account yet? <a href="/api/login/signup">Sign up here</a></p>
+                    <p>Don't have an account yet? <a href="/signup">Sign up here</a></p>
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
@@ -44,4 +44,4 @@
   </div>
 </section>
 
-<script src="/javascript/login.js"></script>
+{{! <script src="/javascript/login.js"></script> }}
