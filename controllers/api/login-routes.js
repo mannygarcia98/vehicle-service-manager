@@ -6,7 +6,6 @@ const passport = require("passport");
 
 // Signup Handle
 router.post("/signup", (req, res) => {
-
   Owner.findOne({
     where: {
       email: req.body.email,
@@ -14,15 +13,11 @@ router.post("/signup", (req, res) => {
   }).then((user) => {
     if (user) {
       const message = "Email already exists";
-<<<<<<< HEAD
       console.log("Email already exits");
       return;
       // res.render("signup", {
       //   // email: message,
       // });
-=======
-      console.log(message);
->>>>>>> 738976e57891134f641d7ac9162c3f3f4c96857e
     } else {
       Owner.create({
         first_name: req.body.first_name,

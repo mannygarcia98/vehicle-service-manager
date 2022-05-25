@@ -1,29 +1,32 @@
 <!-- Header Start -->
-<div class="container">
-  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-centercol-md-5 mb-2 mb-md-0 text-dark text-decoration-none">
-      <span class="h1 fw-bold">Vehicle Service Manager</span>
-    </a>
+<div class="bg-purple">
+  <div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-4">
+      <a href="/" class="d-flex align-items-centercol-md-5 mb-2 mb-md-0 text-dark text-decoration-none">
+        <span class="h1 fw-bold text-light">Vehicle Service Manager</span>
+      </a>
 
-    <div class="col-3 col-md-3 text-end">
-      <button type="button" class="btn btn-outline-primary me-2" id="logout">Log Out</button>
-    </div>
-  </header>
+      <div class="col-3 col-md-3 text-end">
+        <button type="button" class="btn btn-outline-light me-2" id="logout">Log Out</button>
+      </div>
+    </header>
+  </div>
 </div>
+
 <!-- End Header -->
 
 <!-- Vehicles and Services Main -->
 <main class="container">
-  <h3 class="fw-light text-center my-5">Welcome, {{first_name}}. What are we working on today?</h3>
+  <h3 class="fw-light text-center my-5 fs-2">Welcome, {{first_name}}. What are we working on today?</h3>
   <div class="row m-1 pb-5 justify-content-around">
     <div class="col-12 col-md-5 mb-3">
-      <div class="row py-2 text-center border border-2 border-dark rounded">
-        <p class="col-12">Your Vehicles</p>
+      <div class="row py-2 text-center border border-2 border-dark rounded bg-white">
+        <p class="col-12 fw-bold fs-4">Your Vehicles</p>
         {{#each vehicles}}
-          <p class="col-2">{{year}}</p>
-          <p class="col-3">{{make}}</p>
-          <p class="col-3">{{model}}</p>
-          <a class="col-2 text-muted pe-auto editButton" href="#" data-bs-toggle="modal" data-bs-target="#editVehicle" id="{{id}}">Edit</a>
+          <p class="col-2 fs-5">{{year}}</p>
+          <p class="col-3 fs-5">{{make}}</p>
+          <p class="col-3 fs-5">{{model}}</p>
+          <a class="col-2 fs-5 text-muted pe-auto editButton" href="#" data-bs-toggle="modal" data-bs-target="#editVehicle" id="{{id}}">Edit</a>
           <a href="#" class="col-2 delete-vehicle">
             <i class="fa-solid fa-trash text-danger" id="{{id}}"></i>
           </a>
@@ -34,15 +37,15 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-md-3">
-      <div class="row py-2 border border-2 border-dark rounded justify-content-around">
-        <p class="col-12 text-center">Services</p>
-        <p class="col-6">Tire Rotation</p>
-        <p class="col-2">$40</p>
-        <p class="col-6">Oil Change</p>
-        <p class="col-2">$45</p>
-        <p class="col-6">Coolant Flush</p>
-        <p class="col-2">$65</p>
+    <div class="col-12 col-md-5">
+      <div class="row py-2 border border-2 border-dark rounded justify-content-around bg-white">
+        <p class="col-12 text-center fw-bold fs-4">Services</p>
+        <p class="col-6 fs-5">Tire Rotation</p>
+        <p class="col-2 fs-5">$40</p>
+        <p class="col-6 fs-5">Oil Change</p>
+        <p class="col-2 fs-5">$45</p>
+        <p class="col-6 fs-5">Coolant Flush</p>
+        <p class="col-2 fs-5">$65</p>
         <div class="d-flex justify-content-center">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestService">Make an Appointment</button>
         </div>
